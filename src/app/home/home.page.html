@@ -1,20 +1,160 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+  <ion-toolbar color="light">
+    <ion-title class="text-center"> Calculadora de Impuestos </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="background" overflow-scroll="false">
+  <div class="form-group px-5 py-4 position-relative">
+    <input
+      id="textInput"
+      #textInput
+      type="text"
+      class="form-control"
+      style="height: 60px"
+      readonly
+      value="$0"
+    />
+    <ion-icon
+      name="close-circle"
+      color="light"
+      (click)="addDigit('Clear')"
+    ></ion-icon>
+  </div>
+  <div class="calc-buttons px-5">
+    <ion-row>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(1)">1</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(2)">2</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(3)">3</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(4)">4</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(5)">5</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(6)">6</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(7)">7</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(8)">8</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(9)">9</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit('c')">C</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit(0)">0</div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="calc-button" (click)="addDigit('00')">00</div>
+      </ion-col>
+    </ion-row>
+  </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="show-more px-5 mt-5">
+    <ion-button
+      expand="block"
+      color="light"
+      size="large"
+      (click)="scrollTo(false)"
+    >
+      Ver impuestos
+    </ion-button>
+  </div>
+
+  <div class="tax-labels">
+    <div class="sii-tax px-4">
+      <h2 class="mb-3">Impuesto del SII</h2>
+      <div class="form-group">
+        <label for="siiTotalInput" class="text-label"
+          >Valor total + 10,75%</label
+        >
+        <input
+          id="siiTotalInput"
+          type="text"
+          class="form-control"
+          readonly
+          value="$0"
+        />
+        <label for="siiPartialInput" class="text-label mt-2"
+          >Impuesto del 10,75%</label
+        >
+        <input
+          id="siiPartialInput"
+          type="text"
+          class="form-control"
+          readonly
+          value="$0"
+        />
+      </div>
+    </div>
+    <div class="iva-tax px-4 mt-5">
+      <h2 class="mb-3">Impuesto del IVA</h2>
+      <div class="form-group">
+        <label for="ivaTotalInput" class="text-label"
+          >Valor con IVA (19%)</label
+        >
+        <input
+          id="ivaTotalInput"
+          type="text"
+          class="form-control"
+          readonly
+          value="$0"
+        />
+      </div>
+    </div>
+    <div class="other-tax px-4 mt-5">
+      <h2 class="mb-3">Impuesto Personalizado</h2>
+      <div class="form-group">
+        <label for="otherTotalInput" class="text-label"
+          >Valor con {{ customPer }}% extra</label
+        >
+        <div class="form-row align-items-center">
+          <div class="col-8">
+            <input
+              type="text"
+              class="form-control mb-2"
+              id="customTotalInput"
+              readonly
+              value="$0"
+            />
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">%</div>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                [value]="customPer"
+                (change)="setPer($event)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="show-more px-5 mt-5">
+      <ion-button
+        expand="block"
+        color="light"
+        size="large"
+        (click)="scrollTo(true)"
+      >
+        Volver a calculadora
+      </ion-button>
+    </div>
   </div>
 </ion-content>

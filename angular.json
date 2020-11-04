@@ -33,13 +33,19 @@
             ],
             "styles": [
               {
+                "input": "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              },
+              {
                 "input": "src/theme/variables.scss"
               },
               {
                 "input": "src/global.scss"
               }
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
